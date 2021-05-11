@@ -1,19 +1,4 @@
 /**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
- */
-
-/**
  * Define Global Variables
  * 
  */
@@ -24,6 +9,11 @@
  * Start Helper Functions
  * 
  */
+var active = document.getElementsByTagName("section");
+var secs = document.getElementsByClassName("sec");
+// Build menu 
+var ull = document.getElementById("navbar__list");
+
 
 
 
@@ -36,42 +26,25 @@
 // build the nav
 
 
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
- * <li>
-                    <a href="#section1">Section 1</a>
-                </li>
-                <li><a href="#section2">Section 2</a></li>
-                <li><a href="#section3">Section 3</a></li>
-                <li><a href="#section4">Section 4</a></li>
-                <li><a href="#section5">Section 5</a></li>
- */
-var active = document.getElementsByTagName("section");
-var secs = document.getElementsByClassName("sec");
-// Build menu 
-var ull = document.getElementById("navbar__list");
-
-
-
 for (var i = 1; i < 6; i++) {
     var tag = document.createElement("li");
     var tag_a = document.createElement("a");
+    //var br = document.createElement("pre");
 
-    tag_a.href = "#section" + i;
-    tag_a.innerText = "section" + i;
+    tag_a.href = "#section" + i + ' ';
+    tag_a.innerText = "section " + i;
 
     tag.appendChild(tag_a);
+    //ull.appendChild(br);
     ull.appendChild(tag);
 
+
 }
+// Add class 'active' to section when near top of viewport
+
+
+
+
 // Scroll to section on link click
 
 // Set sections as active
@@ -86,22 +59,27 @@ for (var i = 0; i < secs.length; i++) {
     });
 }
 
-var top = document.getElementById("top");
-window.onscroll = function() { scroll_down() };
+//var of scroll to top button
+var scrollToTopBtn = document.getElementById("scrollToTopBtn")
+var rootElement = document.documentElement
 
-function scroll_down() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        top.style.display = "block";
+function scrollToTop() {
+    // Scroll to top logic
+    rootElement.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+}
+scrollToTopBtn.addEventListener("click", scrollToTop)
+
+//hide nav bar while scrolling down
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar__list").style.top = "0";
     } else {
-        top.style.display = "none";
+        document.getElementById("navbar__list").style.top = "-50px";
     }
-}
-
-function toTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
-function scrollWin() {
-    window.scrollTo(0, 0);
+    prevScrollpos = currentScrollPos;
 }
