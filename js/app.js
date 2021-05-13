@@ -9,41 +9,48 @@
  * Start Helper Functions
  * 
  */
-var active = document.getElementsByTagName("section");
-var secs = document.getElementsByClassName("sec");
+const active = document.getElementsByTagName("section");
+const secs = document.getElementsByClassName("sec");
 // Build menu 
-var ull = document.getElementById("navbar__list");
+let ull = document.getElementById("navbar__list");
 
 
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
- */
 
 // build the nav
 
 
-for (var i = 1; i < 6; i++) {
-    var tag = document.createElement("li");
-    var tag_a = document.createElement("a");
-    //var br = document.createElement("pre");
+for (let i = 1; i < 6; i++) {
+    let tag = document.createElement("li");
+    let tag_a = document.createElement("a");
 
     tag_a.href = "#section" + i + ' ';
+    /*tag_a.addEventListener("click", function() {
+    //document.getElementByClassName("active").style.color = "white";
+    console.log("hello");
+}); */
     tag_a.innerText = "section " + i;
 
     tag.appendChild(tag_a);
-    //ull.appendChild(br);
+    tag.classList.add("not-active")
     ull.appendChild(tag);
-
-
+    tag_a.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
 }
+
 // Add class 'active' to section when near top of viewport
 
+let lii = document.getElementsByTagName('li');
 
+lii[0].classList.add("active");
 
+for (let i = 0; i < lii.length; i++) {
+    lii[i].addEventListener("click", function() {
+        let current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+        //secs[i].style.background = "red";
+
+    });
+}
 
 // Scroll to section on link click
 
@@ -51,17 +58,23 @@ for (var i = 1; i < 6; i++) {
 
 
 
-for (var i = 0; i < secs.length; i++) {
+for (let i = 0; i < secs.length; i++) {
     secs[i].addEventListener("click", function() {
-        var current = document.getElementsByClassName("your-active-class");
+        let current = document.getElementsByClassName("your-active-class");
         current[0].className = current[0].className.replace(" your-active-class", "");
         this.className += " your-active-class";
+        secs[i].scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+
+
     });
+
+    //secs[i].style.background = "none";
+
 }
 
 //var of scroll to top button
-var scrollToTopBtn = document.getElementById("scrollToTopBtn")
-var rootElement = document.documentElement
+let scrollToTopBtn = document.getElementById("scrollToTopBtn")
+let rootElement = document.documentElement
 
 function scrollToTop() {
     // Scroll to top logic
@@ -73,9 +86,9 @@ function scrollToTop() {
 scrollToTopBtn.addEventListener("click", scrollToTop)
 
 //hide nav bar while scrolling down
-var prevScrollpos = window.pageYOffset;
+let prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
-    var currentScrollPos = window.pageYOffset;
+    let currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
         document.getElementById("navbar__list").style.top = "0";
     } else {
