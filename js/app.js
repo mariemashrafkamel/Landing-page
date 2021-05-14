@@ -8,7 +8,7 @@
  * Start Helper Functions
  * 
  */
-const active = document.getElementsByTagName("section");
+//const active = document.getElementsByTagName("section");
 const secs = document.getElementsByClassName("sec");
 // Build menu 
 let ull = document.getElementById("navbar__list");
@@ -42,25 +42,21 @@ let lii = document.getElementsByTagName('li');
 function makeActive() {
     for (let i = 0; i < 5; i++) {
         const box = secs[i].getBoundingClientRect();
+        
+
 
         // You can play with the values in the "if" condition to further make it more accurate. 
         if (box.top <= 150 && box.bottom >= 150) {
             // Apply active state on the current section and the corresponding Nav link.
             secs[i].classList.add("your-active-class");
             lii[i].classList.add("active");
+            secs[i].scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 
         } else {
             // Remove active state from other section and corresponding Nav link.
             secs[i].classList.remove("your-active-class");
             lii[i].classList.remove("active");
         }
-        lii[i].addEventListener("click", function() {
-            secs[i].scrollIntoView({
-
-                behavior: 'smooth'
-            })
-
-        });
         // console.log(i);
     }
 }
