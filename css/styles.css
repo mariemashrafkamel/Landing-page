@@ -21,8 +21,8 @@
 /* Style the active class, and buttons on mouse-over */
 
 .active {
-    background-color: rgb(32, 18, 223);
-    color: rgb(250, 250, 250);
+    background-color: rgb(86, 255, 190);
+    color: rgb(0, 0, 0);
 }
 
 .your-active-class,
@@ -161,13 +161,9 @@ main {
 section {
     position: relative;
     min-height: 80vh;
+    transition: .5s;
+    scroll-behavior: smooth;
 }
-
-
-/* ---- Module Rules ---- */
-
-
-/* Navigation Styles*/
 
 .navbar__menu ul {
     padding-left: 0;
@@ -342,4 +338,8 @@ section.your-active-class .landing__container::after {
     to {
         transform: rotate(360deg) translate(-1em) rotate(-360deg);
     }
+}
+
+to {
+    transform: rotate(360deg) translate(-1em) rotate(-360deg);
 }
