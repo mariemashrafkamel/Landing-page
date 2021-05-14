@@ -42,6 +42,7 @@ let lii = document.getElementsByTagName('li');
 function makeActive() {
     for (let i = 0; i < 5; i++) {
         const box = secs[i].getBoundingClientRect();
+
         // You can play with the values in the "if" condition to further make it more accurate. 
         if (box.top <= 150 && box.bottom >= 150) {
             // Apply active state on the current section and the corresponding Nav link.
@@ -53,6 +54,13 @@ function makeActive() {
             secs[i].classList.remove("your-active-class");
             lii[i].classList.remove("active");
         }
+        lii[i].addEventListener("click", function() {
+            secs[i].scrollIntoView({
+
+                behavior: 'smooth'
+            })
+
+        });
         // console.log(i);
     }
 }
@@ -138,3 +146,6 @@ window.onscroll = function() {
     }
     prevScrollpos = currentScrollPos;
 }
+document.getElementById("navbar__list").style.top = "-50px";
+
+//prevScrollpos = currentScrollPos;
